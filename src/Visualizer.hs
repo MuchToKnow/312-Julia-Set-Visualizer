@@ -3,11 +3,15 @@ import Graphics.Image as I
 import Data.Complex as C
 import Data.Time.Clock.POSIX
 
+-- Main function that takes input from user and writes a png image in the out folder
 main = do
     x <- getInt "Input an integral width"
     y <- getInt "Input an integral height"
-    itr <- getInt "Input an integral number of iterations to update f(z) = z^2 + c"
+    itr <- getInt "Input an integral number of iterations to update z = z^2 + c"
     time <- round `fmap` getPOSIXTime
+    -- C value for iterating function z = z^2 + c
+    -- Changing this value will change the fractal
+    -- TODO: Allow this to be set by the user from the commandline or a UI
     let c = (-0.7269) :+ (0.1889) :: Complex Double
     -- jSet is the image array produced by outputting black (0) if the pixel is in the set and white (1) otherwise
     let jSet = makeImageR RPU (y, x) (\(i, j) -> PixelY $ if inSet (normalizer (x,y) (i,j)) c itr then 0 else 1) :: Image RPU Y Double

@@ -14,12 +14,12 @@ main = do
     writeImage ("../out/" ++ (show time) ++ ".png") jSet
 
 -- Normalizes the pixel (i,j) (i-th row, j-th column) from -2 to 2 given the total dimension of the output (x,y) where there are
--- x rows and y columns
+-- x columns and y rows
 normalizer :: (Int, Int) -> (Int, Int) -> (Double, Double)
 normalizer (x,y) (i,j) = do
     -- Double versions of x and y for division
-    let dx = fromIntegral x :: Double
-    let dy = fromIntegral y :: Double
+    let dx = fromIntegral x  / 2.0 :: Double
+    let dy = fromIntegral y / 2.0 :: Double
     (fromIntegral (y-(i*2)) / dy, fromIntegral (x-(j*2)) / dx)
 
 -- Reads an Int from standard in

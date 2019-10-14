@@ -1,13 +1,15 @@
 import Prelude as P
 import Graphics.Image as I
 import Data.Complex as C
+import Data.Time.Clock.POSIX
 main = do
     x <- getInt "Input an integral x size"
     y <- getInt "Input an integral y size"
     itr <- getInt "How many iterations when creating Julia Set"
+    time <- round `fmap` getPOSIXTime
     let c = (0.3) :+ (0.01) :: Complex Double
     let jSet = makeImageR RPU (x, y) (\(i, j) -> PixelY $ if inSet ((fromIntegral i)*2/(fromIntegral x), (fromIntegral j)*2/(fromIntegral y)) c itr then 0 else 1) :: Image RPU Y Double
-    writeImage "j.png" jSet
+    writeImage ("../out/" ++ (show time) ++ ".png") jSet
 
 getInt :: (Read b, Integral b) => String -> IO b
 getInt s = do

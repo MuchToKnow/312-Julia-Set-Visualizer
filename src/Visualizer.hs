@@ -6,7 +6,7 @@ main = do
     y <- getInt "Input an integral y size"
     itr <- getInt "How many iterations when creating Julia Set"
     let c = (0.3) :+ (0.01) :: Complex Double
-    let jSet = makeImageR RPU (x, y) (\(i, j) -> PixelY $ if inSet (i,j) c itr then 0 else 1) :: Image RPU Y Double
+    let jSet = makeImageR RPU (x, y) (\(i, j) -> PixelY $ if inSet ((fromIntegral i)*2/(fromIntegral x), (fromIntegral j)*2/(fromIntegral y)) c itr then 0 else 1) :: Image RPU Y Double
     writeImage "j.png" jSet
 
 getInt :: (Read b, Integral b) => String -> IO b
@@ -16,8 +16,8 @@ getInt s = do
     return (read i)
 
 -- Returns True if given pixel (x,y) is in the Julia set, false otherwise
-inSet :: (Int,Int) -> Complex Double -> Int -> Bool
-inSet (x,y) c itr = C.magnitude(juliaIterate (fromIntegral x :+ fromIntegral y) c itr) < 2
+inSet :: (Double,Double) -> Complex Double -> Int -> Bool
+inSet (x,y) c itr = C.magnitude(juliaIterate (x :+ y) c itr) < 2
 
 -- Updates the complex number Z itr times according to z = z^2 + c
 juliaIterate :: Complex Double -> Complex Double -> Int -> Complex Double

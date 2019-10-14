@@ -14,7 +14,9 @@ main = do
     -- TODO: Allow this to be set by the user from the commandline or a UI
     let c = (-0.7269) :+ (0.1889) :: Complex Double
     -- jSet is the image array produced by outputting black (0) if the pixel is in the set and white (1) otherwise
-    let jSet = makeImageR RPU (y, x) (\(i, j) -> PixelY $ if inSet (normalizer (x,y) (i,j)) c itr then 0 else 1) :: Image RPU Y Double
+    let jSet = makeImageR VU (x, y) (\(i, j) -> if inSet (normalizer (x,y) (i,j)) c itr
+                                     then PixelRGB ((fromIntegral i)/(fromIntegral x)) ((fromIntegral j)/(fromIntegral y)) (fromIntegral 0)
+                                     else PixelRGB (fromIntegral 0) (fromIntegral 0) (fromIntegral 0)) :: Image VU RGB Double
     writeImage ("../out/" ++ (show time) ++ ".png") jSet
 
 -- Normalizes the pixel (i,j) (i-th row, j-th column) from -2 to 2 given the total dimension of the output (x,y) where there are

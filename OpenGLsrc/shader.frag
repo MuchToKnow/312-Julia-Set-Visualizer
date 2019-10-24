@@ -41,11 +41,11 @@ void main()
     {
       if( m2>1024.0 ) continue;
 
-      // Z' -> 2·Z·Z' + 1
-      dz = 2.0*vec2(z.x*dz.x-z.y*dz.y, z.x*dz.y + z.y*dz.x) + vec2(1.0,0.0);
+      // Z' -> 2·Z·Z'
+      dz = 2.0*vec2(z.x*dz.x-z.y*dz.y, z.x*dz.y + z.y*dz.x);
 			
       // Z -> Z² + c			
-      z = vec2( z.x*z.x - z.y*z.y, 2.0*z.x*z.y );
+      z = vec2( z.x*z.x - z.y*z.y, 2.0*z.x*z.y ) + c;
 			
       m2 = dot(z,z);
     }

@@ -56,7 +56,10 @@ void main()
 	//d = clamp( 8.0*d/zoo, 0.0, 1.0 );
 	//d = pow( d, 0.25 );
   int c = iter*2;
-  vec3 col = vec3(c,iter,iter);
+  double dcol = sqrt(c*c + iter*iter + iter*iter);
+  double nc = c/dcol;
+  double niter = iter/dcol;
+  vec3 col = vec3(nc,niter,niter);
     
   // fragColor = vec4( vec3(fragCoord.x,fragCoord.y,0.0), 1.0 );
   fragColor = vec4( col, 1.0 );

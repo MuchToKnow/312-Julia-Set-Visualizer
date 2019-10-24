@@ -23,7 +23,7 @@ out vec4 fragColor;
 
 void main()
 {
-  vec3  iResolution = vec3(1024, 1024, 1.0);
+  vec3  iResolution = vec3(1200, 700, 1.0);
   float iGlobalTime = time / 27.33;
   vec2  p           = -3.0 + 5000.0 * fragCoord.xy / iResolution.xy;
   p.x              *= iResolution.x/iResolution.y;
@@ -58,8 +58,15 @@ void main()
   // do some soft coloring based on distance
 	d = clamp( 8.0*d/zoo, 0.0, 1.0 );
 	d = pow( d, 0.25 );
-  vec3 col = vec3( d );
-    
+  
+  if (d < 1) {
+    d = 1;
+  }
+  else {
+    d = 0;
+  }
+
+  vec3 col = vec3( d *0.7, (d+0.5) * fragCoord.x * sin(iGlobalTime), (d+0.5) * fragCoord.y * cos(iGlobalTime) + 0.5);
   // fragColor = vec4( vec3(fragCoord.x,fragCoord.y,0.0), 1.0 );
   fragColor = vec4( col, 1.0 );
   //fragColor = vec4(1,0,0, 1.0 );

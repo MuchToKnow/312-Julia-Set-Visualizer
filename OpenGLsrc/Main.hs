@@ -54,6 +54,8 @@ main = do
     GL.linkProgram program
     GL.currentProgram $= (Just program)
 
+    time_ul <- GL.uniformLocation program "time"
+
     -- Set the entire screen as the thing to draw on
     let points = [(-1,1),(1,1),(-1,-1),(1,-1)]
     let vertices = map toVertex4 points
@@ -79,17 +81,8 @@ main = do
 
     GL.clearColor $= Color4 0 0 0 1
     
-    let time = 0
-    forever $ do
-        GLFW.pollEvents -- check for key presses and respond to them
-        GL.clear [ColorBuffer]
-        bindVertexArrayObject $= Just triangles
-
+    loop 0 win time_ul
         
-
-        drawArrays Triangles firstIndex 3
-        drawArrays Triangles 1 3
-        GLFW.swapBuffers win -- actually display it on the screen
 
 -- Helper functions for loading shaders:
 getSource :: String -> IO B.ByteString
@@ -97,3 +90,17 @@ getSource path = B.readFile path
 
 bufferOffset :: Integral a => a -> Ptr b
 bufferOffset = plusPtr nullPtr . fromIntegral
+
+loop :: GLint -> Window -> UniformLocation -> IO ()
+loop time win time_ul  =
+    do
+        GLFW.pollEvents -- check for key presses and respond to them
+        GL.clear [ColorBuffer]
+        --bindVertexArrayObject $= Just triangles
+        GL.uniform time_ul $= time        
+
+        drawArrays Triangles 0 3 -- render the first triangle
+        drawArrays Triangles 1 3 -- render the second triangle
+
+        GLFW.swapBuffers win -- actually display it on the screen
+        loop (time + 1) win time_ul

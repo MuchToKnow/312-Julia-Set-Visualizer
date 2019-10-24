@@ -1,4 +1,4 @@
-#version 150
+#version 330
 
 // Created by inigo quilez - iq/2013
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -18,13 +18,13 @@
 // More info here: http://www.iquilezles.org/www/articles/distancefractals/distancefractals.htm
 
 in  vec2 fragCoord;
-in  float time;
+uniform  int time;
 out vec4 fragColor;
 
 void main()
 {
   vec3  iResolution = vec3(1024, 1024, 1.0);
-  float iGlobalTime = time;
+  float iGlobalTime = time / 30.3;
   vec2  p           = -3.0 + 5000.0 * fragCoord.xy / iResolution.xy;
   p.x              *= iResolution.x/iResolution.y;
 
@@ -55,12 +55,12 @@ void main()
   // do some soft coloring based on distance
 	//d = clamp( 8.0*d/zoo, 0.0, 1.0 );
 	//d = pow( d, 0.25 );
-  int c = iter*2;
-  //double dcol = sqrt(c*c + iter*iter + iter*iter);
-  double nc = c/500;
-  double niter = iter/500;
+  float cc = float (iter*2);
+  //double dcol = sqrt(cc*cc + iter*iter + iter*iter);
+  float nc = cc/600.0f;
+  float niter = iter/600.0f;
   vec3 col = vec3(nc,niter,niter);
     
   // fragColor = vec4( vec3(fragCoord.x,fragCoord.y,0.0), 1.0 );
-  fragColor = vec4( col, 1.0 );
+  fragColor = vec4( (col.x) * sin(iGlobalTime) + 0.2, (col.y + 0.5) * sin(iGlobalTime+1) + 0.2, (col.z + 0.5) * sin(iGlobalTime+2) + 0.2, 1.0 );
 }

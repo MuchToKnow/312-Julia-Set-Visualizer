@@ -5,7 +5,7 @@ out vec2 fragCoord;
 out float time;
 
 void main() {
-	time = 1;
+	time = 69;
     gl_Position = vPosition;
     fragCoord = vPosition.xy;
 }

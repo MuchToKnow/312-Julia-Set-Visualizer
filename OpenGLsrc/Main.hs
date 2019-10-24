@@ -55,9 +55,8 @@ main = do
     GL.currentProgram $= (Just program)
 
     -- Set the entire screen as the thing to draw on
-    let points = [(0.5,0.5),(-0.5,0.5),(-0.5,-0.5),(0.5,-0.5)]
+    let points = [(-1,1),(1,1),(-1,-1),(1,-1)]
     let vertices = map toVertex4 points
-    let indices = [0,1,3, 1,2,3]
     let numVertices = length vertices
     triangles <- genObjectName
     bindVertexArrayObject $= Just triangles
@@ -80,14 +79,17 @@ main = do
 
     GL.clearColor $= Color4 0 0 0 1
     
-
+    let time = 0
     forever $ do
         GLFW.pollEvents -- check for key presses and respond to them
         GL.clear [ColorBuffer]
         bindVertexArrayObject $= Just triangles
-        drawArrays Triangles firstIndex 4
-        GLFW.swapBuffers win -- actually display it on the screen
 
+        
+
+        drawArrays Triangles firstIndex 3
+        drawArrays Triangles 1 3
+        GLFW.swapBuffers win -- actually display it on the screen
 
 -- Helper functions for loading shaders:
 getSource :: String -> IO B.ByteString

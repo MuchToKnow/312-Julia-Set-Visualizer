@@ -1,4 +1,4 @@
-#version 150
+#version 330
 
 // Created by inigo quilez - iq/2013
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -62,4 +62,6 @@ void main()
     
   // fragColor = vec4( vec3(fragCoord.x,fragCoord.y,0.0), 1.0 );
   fragColor = vec4( col, 1.0 );
+  //fragColor = vec4(1,0,0, 1.0 );
+
 }

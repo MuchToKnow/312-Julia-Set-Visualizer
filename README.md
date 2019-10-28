@@ -16,7 +16,14 @@ To Run without building:
 To Build and Run (Do this if you have made changes to the source Visualizer.hs):
 `ghc Visualizer.hs && ./Visualizer`
 
+Images will be written as a .png with an epoch timestamp as their name.
+
+![Sample image](https://raw.githubusercontent.com/MuchToKnow/312-Julia-Set-Visualizer/master/out/1571887196.png)
+
 ## How to Run animated version (openGL):
+
+We provide a couple different shaders to experiment with in the OpenGLsrc directory that create different effects.  
+They are loaded on lines 43 (Vertex shader) and 45 (Fragment shader) if you would like to replace them.
 
 cd to directory:
 `cd OpenGLsrc`
@@ -29,6 +36,8 @@ Build:
 
 Run:
 `./Main`
+
+![Sample animation (using juliaShader3.fs.glsl as the fragment shader)](https://external-sea1-1.xx.fbcdn.net/safe_image.php?d=AQA89pSZ_m1E_yj8&url=https%3A%2F%2Fthumbs.gfycat.com%2FUnsightlyJampackedGnu-size_restricted.gif&ext=gif&_nc_hash=AQAOxy9Xi8eDFup6)
 
 ## Packages used (docs):
 

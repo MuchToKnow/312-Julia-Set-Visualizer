@@ -1,5 +1,7 @@
 # Haskell-Julia-Set-Visualizer
 
+![Sample animation (using juliaShader3.fs.glsl as the fragment shader)](https://external-sea1-1.xx.fbcdn.net/safe_image.php?d=AQA89pSZ_m1E_yj8&url=https%3A%2F%2Fthumbs.gfycat.com%2FUnsightlyJampackedGnu-size_restricted.gif&ext=gif&_nc_hash=AQAOxy9Xi8eDFup6)
+
 ## How to Run simple image generator:
 
 cd to directory:

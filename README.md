@@ -1,6 +1,4 @@
-# 312-Julia-Set-Visualizer
-
-### Private project repo for CPSC 312
+# Haskell-Julia-Set-Visualizer
 
 ## How to Run simple image generator:
 
